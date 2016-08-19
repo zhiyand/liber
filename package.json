@@ -3,5 +3,9 @@
   "devDependencies": {
     "gulp": "^3.8.8",
     "laravel-elixir": "^1.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.3",
+    "turbolinks": "^5.0.0"
   }
 }

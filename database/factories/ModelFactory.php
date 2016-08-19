@@ -15,6 +15,8 @@ $factory->define(App\User::class, function ($faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
+        'role' => $faker->randomElement(['user', 'librarian', 'administrator']),
+        'birthday' => $faker->dateTimeBetween('-30 years', 'now'),
         'password' => str_random(10),
         'remember_token' => str_random(10),
     ];
