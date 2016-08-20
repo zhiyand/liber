@@ -9,6 +9,8 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::resource('books', 'BooksController');
+
 // Authentication
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

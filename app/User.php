@@ -39,4 +39,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $dates = ['birthday'];
+
+    /**
+     * Whether the user is a super admin or not
+     *
+     * @return boolean
+     */
+    public function isSuperAdmin()
+    {
+        return $this->role == 'administrator';
+    }
+
+    /**
+     * Whether the user is an admin or not
+     *
+     * @return boolean
+     */
+    public function isAdmin()
+    {
+        return in_array($this->role, ['administrator', 'librarian']);
+    }
 }
