@@ -1,0 +1,18 @@
+.FormBox{
+    background: #f7f7f9;
+    border-radius: 5px;
+    padding: 2rem;
+    width: 24rem;
+    margin: 2rem auto;
+
+    @include clearfix;
+}
+
+.FormBox__title{
+    color: #686868;
+    font-size: 1.25rem;
+    font-weight: normal;
+    text-align:center;
+    margin: 0 0 2rem;
+    text-transform: uppercase;
+}

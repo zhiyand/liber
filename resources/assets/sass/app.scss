@@ -5,6 +5,7 @@
  */
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
+@import "../../../node_modules/font-awesome/scss/font-awesome";
 
 @import "base/variables";
 @import "base/mixins";
@@ -14,3 +15,4 @@
 @import "framework/layout";
 
 @import "components/navigation";
+@import "components/FormBox";
