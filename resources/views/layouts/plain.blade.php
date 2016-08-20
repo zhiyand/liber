@@ -7,7 +7,6 @@
         @yield('header')
     </head>
     <body>
-        @include('partials.navigation')
 
         <div id="page">
             <div class="container">

@@ -7,13 +7,10 @@
                     <a class="nav-link" href="/"><span class="fa fa-home"></span> Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="/books">Library</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="/users">Users</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav pull-xs-right">
