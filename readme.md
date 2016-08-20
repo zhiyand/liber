@@ -2,7 +2,8 @@
 
 ### Setup
 
-```$ composer install
+```
+$ composer install
 $ npm install
 $ gulp
 ```
@@ -11,13 +12,18 @@ $ gulp
 
 Create testing database:
 
-```$ touch storage/database.sqlite```
+```
+$ touch storage/database.sqlite
+```
 
 Migrate database:
 
-```$ DB_CONNECTION=sqlite php artisan migrate```
+```
+$ DB_CONNECTION=sqlite php artisan migrate
+```
 
 Run tests:
 
-```$ vendor/bin/phpunit```
-
+```
+$ vendor/bin/phpunit
+```
