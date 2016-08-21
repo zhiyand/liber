@@ -28,9 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         $this->app->singleton('App\Services\ImageUploader', function ($app) {
-            $manager = new ImageManager([
-                'driver' => 'imagick'
-            ]);
+            $manager = new ImageManager;
 
             return new ImageUploader($manager);
         });

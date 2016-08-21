@@ -34,6 +34,9 @@ class ImageUploader {
 
         if($file->isValid()){
             if($file->move($dir, $filename)){
+                $this->image->make("$dir/$filename")
+                    ->fit(300, 400)
+                    ->save();
                 return "$directory/$filename";
             }
         }
