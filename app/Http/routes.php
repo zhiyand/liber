@@ -3,12 +3,11 @@
 
 Route::get('/', 'BooksController@index');
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/home', 'BooksController@index');
 
 Route::resource('books', 'BooksController');
 Route::resource('loans', 'LoansController');
+Route::resource('users', 'UsersController');
 
 Route::resource('reports/summary', 'ReportsController@summary');
 

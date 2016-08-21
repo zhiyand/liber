@@ -17,9 +17,13 @@
 
                 <p>
                 @if($loan->closed)
-                    <span class="tag tag-danger">Returned</span>
+                    <span class="tag tag-default">Returned</span>
                 @else
                     <span class="tag tag-success">Active</span>
+                @endif
+
+                @if($loan->expired)
+                    <span class="tag tag-danger">Overdue</span>
                 @endif
                 </p>
 
@@ -29,7 +33,7 @@
                     <li>Expiry: <code>{{ $loan->expiry }}</code></li>
 
                     @if($loan->expired)
-                        <li>Fine: {{ $loan->fine }}</li>
+                        <li>Fine: <span class="tag tag-danger">S$ {{ number_format($loan->fine, 2) }}</span></li>
                     @endif
 
                     @if($loan->closed)
