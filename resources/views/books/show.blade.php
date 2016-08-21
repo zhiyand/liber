@@ -13,16 +13,19 @@
 
             <p>{{ $book->description }}</p>
 
-            <form style="display:inline"
-                  method="POST"
-                  action="{{ route('loans.store') }}">
-                {{ csrf_field() }}
-                <input type="hidden" name="book_id" value="{{ $book->id }}">
-                <button type="submit" class="btn btn-sm btn-secondary">
-                    <span class="fa fa-inbox"></span>
-                    Borrow
-                </button>
-            </form>
+            <p>
+            @if($me)
+                <form style="display:inline"
+                      method="POST"
+                      action="{{ route('loans.store') }}">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="book_id" value="{{ $book->id }}">
+                    <button type="submit" class="btn btn-sm btn-secondary">
+                        <span class="fa fa-inbox"></span>
+                        Borrow
+                    </button>
+                </form>
+            @endif
 
             @can('destroy', $book)
             <a href="{{ route('books.edit', $book->id) }}" class="btn btn-sm btn-secondary">
@@ -38,6 +41,25 @@
                 </button>
             </form>
             @endcan
+            </p>
+
+            @if($me && $me->isAdmin())
+                @if($book->loans->count() > 0)
+                    <h2>Loan History</h2>
+                    <ul class="list-group">
+                        @foreach($book->loans as $loan)
+                            <li class="list-group-item {{ $loan->closed ? 'disabled' : '' }}">
+                                {{ $loan->user->name }}
+                                borrowed at <code>{{ $loan->created_at }}</code>
+                                @if($loan->closed)
+                                    returned at <code>{{ $loan->returned_at }}</code>
+                                @endif
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+            @endif
+
         </div>
         <div class="col-sm-4">
             <img src="{{ asset($book->cover) }}">

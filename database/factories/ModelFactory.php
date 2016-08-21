@@ -40,5 +40,6 @@ $factory->define(App\Loan::class, function ($faker) {
         'book_id' => factory(App\Book::class)->create()->id,
         'status' => 'active',
         'expiry' => $faker->dateTimeBetween('-1 years', '+1 years'),
+        'returned_at' => $faker->dateTimeBetween('-1 years', '+1 years'),
     ];
 });

@@ -17,6 +17,7 @@ class CreateLoansTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('book_id')->unsigned();
             $table->timestamp('expiry');
+            $table->timestamp('returned_at')->nullable();
             $table->enum('status', ['active', 'closed'])->default('active');
             $table->timestamps();
 

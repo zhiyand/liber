@@ -83,4 +83,23 @@ class LoansControllerTest extends TestCase
 
     }
 
+    /** @test */
+    public function it_allows_users_to_return_their_borrowed_books()
+    {
+        $user = factory(User::class)->create();
+        $book = factory(Book::class)->create();
+
+        $this->actingAs($user);
+
+        $this->visit(route('books.show', $book->id))
+            ->press('Borrow')
+            ->press('Return Book')
+            ->see('Book returned successfully')
+            ->seeInDatabase('loans', [
+                'user_id' => $user->id,
+                'book_id' => $book->id,
+                'status' => 'closed',
+            ]);
+    }
+
 }

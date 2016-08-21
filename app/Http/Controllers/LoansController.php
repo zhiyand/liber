@@ -16,6 +16,8 @@ class LoansController extends Controller
 {
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('auth');
     }
     /**
@@ -60,20 +62,33 @@ class LoansController extends Controller
             return redirect()->back()->withErrors(['You already borrowed this book.']);
         }
 
-        if($user->books->count() >= config('liber.loan_cap')){
+        if($user->loans->count() >= config('liber.loan_cap')){
             return redirect()->back()->withErrors(['You have reached your loan cap.']);
         }
 
-        DB::transaction(function() use ($user, $book){
-            $user->books()->attach($book, [
-                'expiry' => Carbon::now()->addDays(config('liber.loan_period')),
-            ]);
+        $loan = new Loan([
+            'user_id' => $user->id,
+            'book_id' => $book->id,
+            'expiry' => Carbon::now()->addDays(config('liber.loan_period')),
+            'status' => 'active',
+        ]);
+
+        DB::transaction(function() use ($loan, $book){
+            $loan->save();
 
             $book->loaned += 1;
             $book->save();
         });
 
-        return redirect()->back()->withFlashMessage('Book loan created successfully.');
+        if( ! $loan->id ){
+            return redirect()
+                ->back()
+                ->withErrors(['Unknown error. Please contact admin.']);
+        }
+
+        return redirect()
+            ->route('loans.show', $loan->id)
+            ->withFlashMessage('Book loan created successfully.');
     }
 
     /**
@@ -82,9 +97,12 @@ class LoansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Loan $loan)
     {
-        //
+        return view('loans.show', [
+            'loan' => $loan,
+            'book' => $loan->book,
+        ]);
     }
 
     /**
@@ -116,8 +134,17 @@ class LoansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Loan $loan, Request $request)
     {
-        //
+        $this->authorize($loan);
+
+        DB::transaction(function() use ($loan){
+            $loan->book->loaned -= 1;
+            $loan->book->save();
+
+            $loan->close();
+        });
+
+        return redirect()->back()->withFlashMessage('Book returned successfully.');
     }
 }

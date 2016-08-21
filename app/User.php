@@ -70,6 +70,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function loans()
     {
-        return $this->hasMany(Loan::class)->with('book');
+        return $this->hasMany(Loan::class)
+            ->with('book')
+            ->where('status', 'active');
     }
 }
