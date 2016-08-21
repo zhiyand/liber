@@ -44,7 +44,8 @@ class Loan extends Model
     {
         $now = Carbon::now();
         if($this->expiry->lt($now)){
-            return $this->expiry->diffInDays($now) * config('liber.fine_per_day');
+            $days = ceil($this->expiry->diffInHours($now) / 24);
+            return $days * config('liber.fine_per_day');
         }
 
         return 0;

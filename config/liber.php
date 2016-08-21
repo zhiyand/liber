@@ -16,4 +16,9 @@ return [
      * Maximum duration of a book loan (in days).
      */
     'loan_period' => 14,
+
+    /**
+     * Fine per day after expiry. (S$)
+     */
+    'fine_per_day' => 2,
 ];
