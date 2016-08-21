@@ -119,8 +119,14 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        if($user->loans->count() > 0){
+            return redirect()->back()->withErrors(['The user has active book loans.']);
+        }
+
+        $user->delete();
+
+        return redirect()->route('users.index')->withFlashMessage('User deleted.');
     }
 }

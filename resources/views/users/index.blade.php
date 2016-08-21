@@ -36,6 +36,17 @@
                     <span class="fa fa-pencil"></span>
                     Edit
                 </a>
+                <form method="POST"
+                      style="display:inline;"
+                      action="{{ route('users.destroy', $user->id) }}">
+                      {{ csrf_field() }}
+                      <input type="hidden" name="_method" value="DELETE">
+
+                      <button class="btn btn-danger btn-sm" type="submit">
+                          <span class="fa fa-trash"></span>
+                          Delete
+                      </button>
+                </form>
             </td>
         </tr>
         @endforeach
