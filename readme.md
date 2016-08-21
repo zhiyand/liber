@@ -6,6 +6,7 @@
 $ composer install
 $ npm install
 $ gulp
+$ ln -s storage/app/covers public/covers
 ```
 
 ### Testing
