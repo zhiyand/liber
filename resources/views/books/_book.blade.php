@@ -6,5 +6,6 @@
         <h4 class="card-title">
             {{ $book->title }}
         </h4>
+        <p class="card-text"><em>{{ $book->author }}</em></p>
     </div>
 </div><!-- .card -->

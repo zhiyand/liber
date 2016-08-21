@@ -8,6 +8,11 @@
 @endif
 
 @if($me)
+    <div class="Widget">
+        <form action="/books/search">
+            <input type="text" name="q" placeholder="Type &amp; hit enter to search" class="form-control">
+        </form>
+    </div>
     <div class="List Widget">
 
         <h3 class="List__title">My Book Loans</h3>

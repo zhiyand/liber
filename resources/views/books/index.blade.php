@@ -3,6 +3,11 @@
 @section('content')
 <div class="row">
 <div class="col-md-9">
+
+    @if(isset($term))
+        <h3>Search results for <em>{{ $term }}</em></h3>
+    @endif
+
     @foreach($books->chunk(4) as $chunk)
         <div class="row">
         @foreach($chunk as $book)

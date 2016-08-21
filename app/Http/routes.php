@@ -2,8 +2,9 @@
 
 
 Route::get('/', 'BooksController@index');
-
 Route::get('/home', 'BooksController@index');
+
+Route::get('/books/search', 'SearchController@index');
 
 Route::resource('books', 'BooksController');
 Route::resource('loans', 'LoansController');

@@ -62,15 +62,28 @@
 
         </div>
         <div class="col-sm-4">
-            <img src="{{ asset($book->cover) }}">
 
-            <ul>
-                <li>ISBN: {{ $book->isbn }}</li>
-                <li>Quantity: {{ $book->quantity }}</li>
-                <li>In Circulation: {{ $book->loaned }}</li>
-                <li>On Shelf: {{ $book->shelf }}</li>
-            </ul>
-        </div>
-    </div>
+            <div class="card BookCard" style="max-width:300px;">
+                <a href="{{ route('books.show', $book->id) }}">
+                    <img class="card-img-top" src="{{ asset($book->cover) }}" alt="{{ $book->title }}">
+                </a>
+                <div class="card-block">
+                    <h4 class="card-title">
+                        {{ $book->title }}
+                    </h4>
+                    <p class="card-text">
+                        <em>{{ $book->author }}</em>
+                        <ul>
+                            <li>ISBN: {{ $book->isbn }}</li>
+                            <li>Quantity: {{ $book->quantity }}</li>
+                            <li>In Circulation: {{ $book->loaned }}</li>
+                            <li>On Shelf: {{ $book->shelf }}</li>
+                        </ul>
+                    </p>
+                </div>
+            </div><!-- .card -->
+
+        </div><!-- .col -->
+    </div><!-- .row -->
 
 @stop
