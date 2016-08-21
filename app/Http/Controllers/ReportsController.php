@@ -16,7 +16,7 @@ class ReportsController extends Controller
         parent::__construct();
 
         $this->middleware('auth');
-        $this->middleware('admin');
+        $this->middleware('role:librarian|administrator');
     }
 
     public function summary()

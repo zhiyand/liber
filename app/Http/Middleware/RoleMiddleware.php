@@ -3,17 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Auth\Guard;
 
-class Administrator
+class RoleMiddleware
 {
-    protected $auth;
-
-    public function __construct(Guard $auth)
-    {
-        $this->auth = $auth;
-    }
-
     /**
      * Handle an incoming request.
      *
@@ -21,13 +13,15 @@ class Administrator
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $roles)
     {
-        if ($this->auth->guest() || ! $this->auth->user()->isAdmin()) {
+        $roles = array_filter(explode('|', $roles));
+
+        if( ! in_array($request->user()->role, $roles)){
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('auth/login');
+                return abort(403);
             }
         }
 
