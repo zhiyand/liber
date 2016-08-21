@@ -143,6 +143,10 @@ class BooksController extends Controller
     {
         $this->authorize($book);
 
+        if($book->loans()->active()->count() > 0){
+            return redirect()->back()->withErrors(['The book has active loans.']);
+        }
+
         $book->delete();
 
         return redirect()->route('books.index');

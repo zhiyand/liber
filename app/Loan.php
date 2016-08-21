@@ -23,6 +23,11 @@ class Loan extends Model
         $this->save();
     }
 
+    public function scopeActive($query)
+    {
+        $query->where('status', 'active');
+    }
+
     /** Accessors */
 
     public function getClosedAttribute()
