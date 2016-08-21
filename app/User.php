@@ -59,4 +59,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return in_array($this->role, ['administrator', 'librarian']);
     }
+
+    /** Relationships **/
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class, 'loans', 'user_id', 'book_id')
+            ->withTimestamps();
+    }
+
+    public function loans()
+    {
+        return $this->hasMany(Loan::class)->with('book');
+    }
 }

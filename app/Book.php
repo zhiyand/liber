@@ -15,4 +15,9 @@ class Book extends Model
         'description',
         'cover',
     ];
+
+    public function getStockAttribute()
+    {
+        return $this->attributes['quantity'] - $this->attributes['loaned'];
+    }
 }

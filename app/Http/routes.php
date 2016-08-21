@@ -10,6 +10,7 @@ Route::get('/home', function () {
 });
 
 Route::resource('books', 'BooksController');
+Route::resource('loans', 'LoansController');
 
 // Authentication
 Route::get('auth/login', 'Auth\AuthController@getLogin');

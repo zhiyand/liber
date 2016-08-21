@@ -7,20 +7,7 @@
         <div class="row">
         @foreach($chunk as $book)
             <div class="col-md-3">
-                <div class="card BookCard">
-                    <a href="{{ route('books.show', $book->id) }}">
-                        <img class="card-img-top" src="{{ asset($book->cover) }}" alt="{{ $book->title }}">
-                    </a>
-                    <div class="card-block">
-                        <h4 class="card-title">
-                            <a href="{{ route('books.show', $book->id) }}">{{ $book->title }}</a>
-                        </h4>
-                        <a href="#" class="btn btn-secondary btn-sm">
-                            <span class="fa fa-inbox"></span>
-                            Borrow
-                        </a>
-                    </div>
-                </div><!-- .card -->
+                @include('books._book')
             </div><!-- .col -->
         @endforeach
         </div><!-- .row -->

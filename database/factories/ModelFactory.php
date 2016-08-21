@@ -33,3 +33,12 @@ $factory->define(App\Book::class, function ($faker) {
         'cover' => $faker->imageUrl(400, 300),
     ];
 });
+
+$factory->define(App\Loan::class, function ($faker) {
+    return [
+        'user_id' => factory(App\User::class)->create()->id,
+        'book_id' => factory(App\Book::class)->create()->id,
+        'status' => 'active',
+        'expiry' => $faker->dateTimeBetween('-1 years', '+1 years'),
+    ];
+});
