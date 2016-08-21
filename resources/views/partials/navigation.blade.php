@@ -9,9 +9,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/books">Library</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users">Users</a>
-                </li>
+                @if($me && $me->isAdmin())
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reports/summary">Report</a>
+                    </li>
+                @endif
             </ul>
             <ul class="nav navbar-nav pull-xs-right">
             @if(auth()->check())

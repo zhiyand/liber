@@ -1,9 +1,7 @@
 <?php
 
 
-Route::get('/', function () {
-    return redirect()->route('books.index');
-});
+Route::get('/', 'BooksController@index');
 
 Route::get('/home', function () {
     return view('home');
@@ -11,6 +9,8 @@ Route::get('/home', function () {
 
 Route::resource('books', 'BooksController');
 Route::resource('loans', 'LoansController');
+
+Route::resource('reports/summary', 'ReportsController@summary');
 
 // Authentication
 Route::get('auth/login', 'Auth\AuthController@getLogin');
