@@ -3,18 +3,24 @@
         <div class="container">
             <a class="navbar-brand" href="/">Liber</a>
             <ul class="nav navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/"><span class="fa fa-home"></span> Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/books">Library</a>
+                <li class="nav-item {{ request()->is('books*') ? 'active' : '' }}">
+                    <a class="nav-link" href="/books">
+                        <span class="fa fa-bank"></span>
+                        Library
+                    </a>
                 </li>
                 @if($me && $me->isAdmin())
-                    <li class="nav-item">
-                        <a class="nav-link" href="/users">Users</a>
+                    <li class="nav-item {{ request()->is('users*') ? 'active' : '' }}">
+                        <a class="nav-link" href="/users">
+                            <span class="fa fa-users"></span>
+                            Users
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/reports/summary">Report</a>
+                    <li class="nav-item {{ request()->is('reports*') ? 'active' : '' }}">
+                        <a class="nav-link" href="/reports/summary">
+                            <span class="fa fa-area-chart"></span>
+                            Report
+                        </a>
                     </li>
                 @endif
             </ul>
