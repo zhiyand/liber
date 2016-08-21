@@ -62,7 +62,7 @@ class LoansController extends Controller
             return redirect()->back()->withErrors(['You already borrowed this book.']);
         }
 
-        if($user->loans->count() >= config('liber.loan_cap')){
+        if($user->loans->count() >= $user->loanCap){
             return redirect()->back()->withErrors(['You have reached your loan cap.']);
         }
 

@@ -62,9 +62,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /** Accessors */
+
     public function getAgeAttribute()
     {
         return $this->birthday->diffInYears(Carbon::now());
+    }
+
+    public function getLoanCapAttribute()
+    {
+        return config($this->age <= 12 ? 'liber.children_loan_cap' : 'liber.loan_cap');
     }
 
     /** Relationships **/
