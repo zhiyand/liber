@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Book;
+use App\Services\ImageUploader;
 
 class BooksController extends Controller
 {
@@ -41,7 +42,7 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, ImageUploader $uploader)
     {
         $this->validate($request, [
             'title' => 'required',
@@ -59,14 +60,7 @@ class BooksController extends Controller
         $this->authorize($book);
 
         $cover = $request->file('cover');
-        $filename = join('.', [str_random(32), $cover->guessExtension()]);
-
-        if($cover->isValid()){
-            $cover->move(storage_path('app/covers'), $filename);
-        }
-
-        $book->cover = "covers/$filename";
-
+        $book->cover = $uploader->store($cover);
         $book->save();
 
         return redirect()->route('books.show', $book->id);
@@ -103,7 +97,7 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, Book $book, ImageUploader $uploader)
     {
         $this->authorize($book);
 
@@ -122,13 +116,7 @@ class BooksController extends Controller
         if($request->hasFile('cover'))
         {
             $cover = $request->file('cover');
-            $filename = join('.', [str_random(32), $cover->guessExtension()]);
-
-            if($cover->isValid()){
-                $cover->move(storage_path('app/covers'), $filename);
-            }
-
-            $data['cover'] = "covers/$filename";
+            $data['cover'] = $uploader->store($cover);
         }
 
         $book->update($data);

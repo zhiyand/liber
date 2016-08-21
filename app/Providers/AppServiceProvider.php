@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Intervention\Image\ImageManager;
+
+use App\Services\ImageUploader;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +27,12 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->singleton('App\Services\ImageUploader', function ($app) {
+            $manager = new ImageManager([
+                'driver' => 'imagick'
+            ]);
+
+            return new ImageUploader($manager);
+        });
     }
 }

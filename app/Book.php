@@ -13,5 +13,6 @@ class Book extends Model
         'quantity',
         'shelf',
         'description',
+        'cover',
     ];
 }
