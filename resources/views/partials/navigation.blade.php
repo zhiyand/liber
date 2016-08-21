@@ -27,7 +27,7 @@
             <ul class="nav navbar-nav pull-xs-right">
             @if(auth()->check())
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Account</a>
+                    <a class="nav-link" href="/users/me">Account</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/auth/logout">Logout</a>

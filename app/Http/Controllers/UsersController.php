@@ -13,10 +13,8 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        parent::__construct();
-
         $this->middleware('auth');
-        $this->middleware('role:librarian|administrator');
+        $this->middleware('role:librarian|administrator', ['except' => ['me']]);
     }
     /**
      * Display a listing of the resource.
@@ -68,9 +66,17 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('users.show', [
+            'user' => $user,
+            'loans' => $user->loans()->latest()->paginate(8),
+        ]);
+    }
+
+    public function me(Request $request)
+    {
+        return $this->show($request->user());
     }
 
     /**

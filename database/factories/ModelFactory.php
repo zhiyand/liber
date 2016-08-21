@@ -29,7 +29,7 @@ $factory->define(App\Book::class, function ($faker) {
         'isbn' => $faker->isbn13,
         'quantity' => $faker->numberBetween(1, 10),
         'shelf' => '#' . $faker->word,
-        'description' => $faker->paragraph,
+        'description' => $faker->paragraph(10, false),
         'cover' => $faker->imageUrl(400, 300),
     ];
 });

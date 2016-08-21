@@ -57,6 +57,9 @@
             @endif
 
         </div>
+        <div class="col-md-3">
+            @include('partials.sidebar')
+        </div>
     </div>
 
 @stop
