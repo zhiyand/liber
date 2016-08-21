@@ -12,6 +12,11 @@ use App\Services\ImageUploader;
 
 class BooksController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['show', 'index']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +24,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = Book::latest()->get();
+        $books = Book::latest()->paginate(8);
 
         return view('books.index', compact('books'));
     }
