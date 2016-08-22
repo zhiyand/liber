@@ -10,8 +10,16 @@
 @if($me)
     <div class="Widget">
         <form action="/books/search">
-            <input type="text" name="q" placeholder="Type &amp; hit enter to search" class="form-control">
+            <div class="input-group">
+                <input type="text" name="q" placeholder="Search for..." class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="submit" id="btn-search">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </span>
+            </div>
         </form>
+
     </div>
     <div class="List Widget">
 

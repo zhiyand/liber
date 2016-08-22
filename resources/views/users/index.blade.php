@@ -42,7 +42,7 @@
                       {{ csrf_field() }}
                       <input type="hidden" name="_method" value="DELETE">
 
-                      <button class="btn btn-danger btn-sm" type="submit">
+                      <button id="delete-user-{{ $user->id }}" class="btn btn-danger btn-sm" type="submit">
                           <span class="fa fa-trash"></span>
                           Delete
                       </button>

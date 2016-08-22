@@ -11,11 +11,6 @@ use App\Book;
 
 class SearchController extends Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function index(Request $request)
     {
         $term = $request->q;
@@ -23,7 +18,6 @@ class SearchController extends Controller
         $books = Book::where('title', 'like', "%$term%")
             ->orWhere('author', 'like', "%$term%")
             ->paginate();
-
 
         return view('books.index', compact('books', 'term'));
     }

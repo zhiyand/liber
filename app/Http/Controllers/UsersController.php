@@ -54,7 +54,10 @@ class UsersController extends Controller
             'role' => 'required|in:user,librarian,administrator',
         ]);
 
-        User::create($request->only('name', 'email', 'birthday', 'role'));
+        $data = $request->only('name', 'email', 'birthday', 'role');
+        $data['password'] = bcrypt($request->password);
+
+        User::create($data);
 
         return redirect()->route('users.index')
             ->withFlashMessage('User created.');

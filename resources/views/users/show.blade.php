@@ -18,7 +18,9 @@
                         <h4 class="card-title">
                             {{ $loan->book->title }}
                         </h4>
-                        <p class="card-text"><em>{{ $loan->book->author }}</em></p>
+                        <p class="card-text">
+                            <em>{{ $loan->book->author }}</em>
+                        </p>
                     </div>
                 </div><!-- .card -->
             </div><!-- .col -->
