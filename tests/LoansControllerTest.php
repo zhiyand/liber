@@ -4,6 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use Carbon\Carbon;
 use App\User;
 use App\Book;
 use App\Loan;
@@ -100,6 +101,24 @@ class LoansControllerTest extends TestCase
                 'book_id' => $book->id,
                 'status' => 'closed',
             ]);
+    }
+
+    /** @test */
+    public function it_denies_access_to_other_users_loan()
+    {
+        $userA = factory(User::class)->create(['role' => 'user']);
+        $userB = factory(User::class)->create(['role' => 'user']);
+        $book = factory(Book::class)->create();
+
+        $userA->books()->attach($book, ['expiry' => Carbon::now()]);
+        $userB->books()->attach($book, ['expiry' => Carbon::now()]);
+
+        $loanB = $userB->loans->first();
+
+        $this->actingAs($userA);
+
+        $this->visit('/loans/'. $loanB->id)
+            ->see('Permission denied');
     }
 
 }

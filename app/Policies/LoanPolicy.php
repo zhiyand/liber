@@ -18,6 +18,13 @@ class LoanPolicy
         //
     }
 
+    public function show($user, $loan)
+    {
+        if($user->id == $loan->user_id){
+            return true;
+        }
+    }
+
     public function destroy($user, $loan)
     {
         if($user->id == $loan->user_id){

@@ -97,6 +97,8 @@ class LoansController extends Controller
      */
     public function show(Loan $loan)
     {
+        $this->authorize($loan);
+
         return view('loans.show', [
             'loan' => $loan,
             'book' => $loan->book,
