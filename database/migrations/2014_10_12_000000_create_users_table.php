@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->timestamp('birthday');
             $table->enum('role', ['user', 'librarian', 'administrator']);
+            $table->string('api_token', 60)->unique();
             $table->rememberToken();
             $table->timestamps();
         });
